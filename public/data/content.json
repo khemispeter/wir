@@ -1,0 +1,120 @@
+{
+  "activities": [
+    {
+      "status": "ongoing",
+      "title": "Community nutrition clubs",
+      "location": "District A",
+      "image": "images/ongoing/nutrition.jpg",
+      "text": "Mothers and caregivers learn to cook balanced meals and grow kitchen gardens."
+    },
+    {
+      "status": "ongoing",
+      "title": "Tailoring and business skills",
+      "location": "District B",
+      "image": "images/ongoing/skills.jpg",
+      "text": "Young women train in tailoring and basic bookkeeping, then start savings groups."
+    },
+    {
+      "status": "planned",
+      "title": "Safe spaces for girls",
+      "location": "District C",
+      "image": "images/planned/safe-spaces.jpg",
+      "text": "Safe meeting places with trained mentors for girls to learn, play and speak up."
+    },
+    {
+      "status": "planned",
+      "title": "Women's peace circles",
+      "location": "District D",
+      "image": "images/planned/peace.jpg",
+      "text": "Regular dialogues that help neighbours settle disputes without conflict."
+    },
+    {
+      "status": "implemented",
+      "title": "School health and hygiene drive",
+      "location": "District A",
+      "image": "images/implemented/hygiene.jpg",
+      "text": "Handwashing stations and hygiene lessons reached local primary schools."
+    },
+    {
+      "status": "implemented",
+      "title": "Village savings groups",
+      "location": "District B",
+      "image": "images/implemented/savings.jpg",
+      "text": "Women formed savings groups and opened small businesses with their own capital."
+    }
+  ],
+  "partners": [
+    {
+      "name": "Hope Bridge Foundation",
+      "type": "partner",
+      "logo": "images/partners/hope-bridge-foundation.svg",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Greenleaf Health Alliance",
+      "type": "partner",
+      "logo": "images/partners/greenleaf-health-alliance.svg",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Unity Youth Network",
+      "type": "partner",
+      "logo": "images/partners/unity-youth-network.svg",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Bright Future Education Trust",
+      "type": "partner",
+      "logo": "images/partners/bright-future-education-trust.svg",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Riverstone Community Partners",
+      "type": "partner",
+      "logo": "images/partners/riverstone-community-partners.svg",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Safe Haven Legal Aid",
+      "type": "partner",
+      "logo": "images/partners/safe-haven-legal-aid.svg",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Sunrise Global Giving",
+      "type": "donor",
+      "logo": "images/donors/sunrise-global-giving.svg",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Horizon Aid Trust",
+      "type": "donor",
+      "logo": "images/donors/horizon-aid-trust.svg",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Open Hands Charitable Foundation",
+      "type": "donor",
+      "logo": "images/donors/open-hands-charitable-foundation.svg",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Lakeview Family Foundation",
+      "type": "donor",
+      "logo": "images/donors/lakeview-family-foundation.svg",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Evergreen Women’s Fund",
+      "type": "donor",
+      "logo": "images/donors/evergreen-womens-fund.svg",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Kindred Hearts Trust",
+      "type": "donor",
+      "logo": "images/donors/kindred-hearts-trust.svg",
+      "url": "https://example.com"
+    }
+  ]
+}

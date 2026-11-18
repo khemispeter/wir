@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Admin | Women Rise Initiatives</title>
+<link rel="stylesheet" href="css/style.css"></head>
+<body class="adm"><main class="wrap" style="padding:48px 0">
+<form id="login" class="box form" style="max-width:380px;margin:60px auto">
+  <h2>Admin login</h2>
+  <input name="username" placeholder="Username" aria-label="Username" required>
+  <input type="password" name="password" placeholder="Password" aria-label="Password" required>
+  <button class="btn">Log in</button><p class="msg err" id="lmsg"></p>
+</form>
+<div id="panel" hidden>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+    <h2 style="margin:0">Inbox</h2><div><a class="btn" href="index.html">View site</a> <button class="btn" id="out">Log out</button></div></div>
+  <h3 style="margin-top:28px">Messages and suggestions (<span id="mc">0</span>)</h3>
+  <div class="sc"><table class="tbl"><thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Phone</th><th>Message</th><th></th></tr></thead><tbody id="msgs"></tbody></table></div>
+  <h3 style="margin-top:36px">Newsletter subscribers (<span id="sc">0</span>)</h3>
+  <div class="sc"><table class="tbl"><thead><tr><th>Email</th><th>Subscribed</th></tr></thead><tbody id="subs"></tbody></table></div>
+</div></main>
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let tok = sessionStorage.getItem('t');
+function logout() { sessionStorage.removeItem('t'); tok = null; $('#panel').hidden = true; $('#login').hidden = false; }
+async function api(u, o = {}) {
+  const r = await fetch(u, { ...o, headers: { Authorization: 'Bearer ' + tok } });
+  if (r.status === 401) { logout(); throw new Error('auth'); }
+  return r.json();
+}
+async function load() {
+  if (!tok) return;
+  try {
+    const [m, s] = await Promise.all([api('/api/admin/messages'), api('/api/admin/subscribers')]);
+    $('#login').hidden = true; $('#panel').hidden = false;
+    $('#mc').textContent = m.length; $('#sc').textContent = s.length;
+    $('#msgs').innerHTML = m.map(x => `<tr><td>${esc(x.created_at)}</td><td>${esc(x.name)}</td>
+      <td><a href="mailto:${esc(x.email)}">${esc(x.email)}</a></td><td>${esc(x.phone)}</td><td>${esc(x.message)}</td>
+      <td><button class="del" data-id="${x.id}">Delete</button></td></tr>`).join('') || '<tr><td colspan="6">No messages yet.</td></tr>';
+    $('#subs').innerHTML = s.map(x => `<tr><td>${esc(x.email)}</td><td>${esc(x.created_at)}</td></tr>`).join('') || '<tr><td colspan="2">No subscribers yet.</td></tr>';
+  } catch (e) {}
+}
+$('#login').onsubmit = async e => {
+  e.preventDefault();
+  const r = await fetch('/api/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(Object.fromEntries(new FormData(e.target))) });
+  const d = await r.json();
+  if (!r.ok) return $('#lmsg').textContent = d.error;
+  tok = d.token; sessionStorage.setItem('t', tok); e.target.reset(); $('#lmsg').textContent = ''; load();
+};
+document.addEventListener('click', async e => {
+  if (e.target.classList.contains('del') && confirm('Delete this message?')) {
+    await api('/api/admin/messages/' + e.target.dataset.id, { method: 'DELETE' }); load();
+  }
+});
+$('#out').onclick = logout;
+load();
+</script></body></html>
